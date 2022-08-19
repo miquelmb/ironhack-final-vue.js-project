@@ -6,7 +6,7 @@
     </div>
 
     <!-- registration -->
-    <form>
+    <form @submit.prevent="signIn">
       <h1>Sign In</h1>
 
       <div>
@@ -60,7 +60,7 @@ const password = ref("");
 // Error Message
 const errorMsg = ref("");
 
-//Show hide password variables
+//Show hide password variables. Hacer que se vea apretando la opción. 
 const passwordFieldType = computed(() =>
   hidePassword.value ? "password" : "text"
 );
@@ -70,21 +70,40 @@ const hidePassword = ref(true);
 const redirect = useRouter();
 
 // Arrow function to Signin user to supaBase
+
 const signIn = async () => {
   try {
-    // calls the user store and send the users info to backend to logIn
-    await useUserStore().signIn(email.value, password.value);
-    // redirects user to the homeView
+    const {error} = await supabase.auth.signIn({
+      email: email.value,
+      password: password.value,
+    });
+    if (error) throw error;
     redirect.push({ path: "/" });
-  } catch (error) {
-    // displays error message
+  } catch(error) {
     errorMsg.value = `Error: ${error.message}`;
-    // hides error message
     setTimeout(() => {
       errorMsg.value = null;
     }, 5000);
   }
 };
+
+
+
+// const signIn = async () => {
+//   try {
+//     // calls the user store and send the users info to backend to logIn
+//     await useUserStore().signIn(email.value, password.value);
+//     // redirects user to the homeView
+//     redirect.push({ path: "/" });
+//   } catch (error) {
+//     // displays error message
+//     errorMsg.value = `Error: ${error.message}`;
+//     // hides error message
+//     setTimeout(() => {
+//       errorMsg.value = null;
+//     }, 5000);
+//   }
+// };
 </script>
 
 <style>

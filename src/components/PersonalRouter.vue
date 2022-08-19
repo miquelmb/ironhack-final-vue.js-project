@@ -10,3 +10,5 @@ defineProps({
 </script>
 
 <style></style>
+
+<!-- para routear mediante props y utilizar un componente -->

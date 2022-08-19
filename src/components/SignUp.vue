@@ -6,7 +6,7 @@
     </div>
 
     <!-- registration -->
-    <form @submit.prevent="signUp">
+    <form  @submit.prevent="signUp">
       <h1>Sign Up</h1>
 
       <div>
@@ -55,6 +55,7 @@
 <script setup>
 // import PersonalRouter from "./PersonalRouter.vue";
 import { useRouter } from "vue-router";
+import PersonalRouter from "./PersonalRouter.vue";
 import { supabase } from "../supabase";
 import { ref } from "vue";
 
@@ -93,17 +94,17 @@ const signUp = async () => {
       redirect.push({ path: "/auth/login" });
     } catch(error) {
       errorMsg.value = error.message;
+      // remove the error after 5 seconds
       setTimeout(() => {
         errorMsg.value = null;
-      }, 4000)
+      }, 5000)
     }
     return;
   }
   errorMsg.value = "Error: both passwords don't match"
-  // remove the error after 4 seconds
   setTimeout(() => {
     errorMsg.value = null;
-  }, 4000)
+  }, 5000)
 };
 
 // Router to push user once SignedUp to Log In

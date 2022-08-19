@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Nav />
     <router-view />
   </div>
 </template>
@@ -11,7 +10,6 @@ import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
 import { useUserStore } from "./stores/user.js";
 import { ref } from "vue";
-import Nav from "./components/Nav.vue"
 
 const router = useRouter();
 const userStore = useUserStore();
@@ -27,7 +25,7 @@ onMounted(async () => {
       router.push({ path: "/auth/login" });
     } else {
       // continue to dashboard
-      // router.push({ path: "/" });
+      router.push({ path: "/" });
     }
   } catch (e) {
     console.log(e);
