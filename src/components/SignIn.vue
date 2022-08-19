@@ -1,8 +1,9 @@
 <template>
   <div>Sign In</div>
+  <input type="text">
+  <input type="text">
+  <br>
   <PersonalRouter :route="route" :buttonText="buttonText" />
-  <p>Time to build up the Final Project!</p>
-  <p class="wu-text">Wu Tang Forever</p>
 </template>
 
 <script setup>
@@ -52,9 +53,6 @@ const signIn = async () => {
 </script>
 
 <style>
-.wu-text {
-  color: black;
-}
 
 .form {
   display: flex;

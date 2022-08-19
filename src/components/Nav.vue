@@ -1,5 +1,5 @@
 <template>
-  <div>Nav Component</div>
+  <div>I'm the nav</div>
 </template>
 
 <script setup>
