@@ -1,7 +1,42 @@
 <template>
-  <div>Sign In</div>
-  <input type="text">
-  <input type="text">
+    <div>
+    <!-- error handling -->
+    <div v-if="errorMsg">
+      <p>{{ errorMsg }}</p>
+    </div>
+
+    <!-- registration -->
+    <form>
+      <h1>Sign In</h1>
+
+      <div>
+        <label for="email">Email</label>
+        <input
+          v-model="email"
+          id="email"
+          placeholder="Enter your e-mail"
+          type="email"
+          required
+        />
+      </div>
+
+      <div>
+        <label for="password">Password</label>
+        <input
+          v-model="password"
+          id="password"
+          placeholder="Type your password"
+          type="password"
+          required
+        />
+      </div>
+
+      <button type="submit">Sign In</button>
+
+    </form>
+
+  </div>
+  
   <br>
   <PersonalRouter :route="route" :buttonText="buttonText" />
 </template>
@@ -16,7 +51,7 @@ import { storeToRefs } from "pinia";
 
 // Route Variables
 const route = "/auth/sign-up";
-const buttonText = "Test the Sign Up Route";
+const buttonText = "Not registered? Sign up here";
 
 // Input Fields
 const email = ref("");

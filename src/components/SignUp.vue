@@ -6,22 +6,22 @@
     </div>
 
     <!-- registration -->
-    <form>
+    <form @submit.prevent="signUp">
       <h1>Sign Up</h1>
 
       <div>
-        <label for="email"></label>
+        <label for="email">Email</label>
         <input
           v-model="email"
           id="email"
           placeholder="Enter your e-mail"
-          type="text"
+          type="email"
           required
         />
       </div>
 
       <div>
-        <label for="password"></label>
+        <label for="password">Password</label>
         <input
           v-model="password"
           id="password"
@@ -32,7 +32,7 @@
       </div>
 
       <div>
-        <label for="confirmPassword"></label>
+        <label for="confirmPassword">Confirm Pasword</label>
         <input
           v-model="confirmPassword"
           id="confirmPasword"
@@ -41,6 +41,8 @@
           required
         />
       </div>
+
+      <button type="submit">Sign Up</button>
 
     </form>
 
@@ -51,12 +53,15 @@
 </template>
 
 <script setup>
-import PersonalRouter from "./PersonalRouter.vue";
+// import PersonalRouter from "./PersonalRouter.vue";
+import { useRouter } from "vue-router";
+import { supabase } from "../supabase";
 import { ref } from "vue";
 
 // Route Variables
 const route = "/auth/login";
-const buttonText = "Test the Sign In Route";
+const buttonText = "Already have an account?";
+const redirect = useRouter();
 
 // Input Fields
 const email = ref(null);
@@ -69,6 +74,37 @@ const errorMsg = ref(null);
 // Show hide password variable
 
 // Show hide confrimPassword variable
+
+// Sign up function
+
+const signUp = async () => {
+  //check is two passwords are the same
+  if (password.value === confirmPassword.value) {
+    try {
+      // deconstruct the response and only grab the error
+      const { error } = await supabase.auth.signUp({
+        email: email.value,
+        password: password.value,
+      });
+      // detect errors that supabase can throw
+      if (error) throw error;
+      // if no errors, send them to the login webpage
+      // route.push({name: "Login"})
+      redirect.push({ path: "/auth/login" });
+    } catch(error) {
+      errorMsg.value = error.message;
+      setTimeout(() => {
+        errorMsg.value = null;
+      }, 4000)
+    }
+    return;
+  }
+  errorMsg.value = "Error: both passwords don't match"
+  // remove the error after 4 seconds
+  setTimeout(() => {
+    errorMsg.value = null;
+  }, 4000)
+};
 
 // Router to push user once SignedUp to Log In
 
