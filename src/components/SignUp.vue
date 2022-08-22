@@ -1,115 +1,85 @@
 <template>
-  <div>
-    <!-- error handling -->
-    <div v-if="errorMsg">
-      <p>{{ errorMsg }}</p>
+  <div>Sign Up</div>
+
+  <div v-if="errorMsg">
+    <p>{{ errorMsg}}</p>
+  </div>
+
+  <form @submit.prevent="signUp">
+  
+    <div>
+      <label for="email">Email</label>
+      <input type="email" required id="email" v-model="email">
     </div>
 
-    <!-- registration -->
-    <form  @submit.prevent="signUp">
-      <h1>Sign Up</h1>
+    <div>
+      <label for="password">Password</label>
+      <input type="password" required id="password" v-model="password">
+    </div>
 
-      <div>
-        <label for="email">Email</label>
-        <input
-          v-model="email"
-          id="email"
-          placeholder="Enter your e-mail"
-          type="email"
-          required
-        />
-      </div>
+    <div>
+      <label for="confirmPassword">Confirm your password</label>
+      <input type="password" required id="confirmPassword" v-model="confirmPassword">
+    </div>
 
-      <div>
-        <label for="password">Password</label>
-        <input
-          v-model="password"
-          id="password"
-          placeholder="Type your password"
-          type="password"
-          required
-        />
-      </div>
+    <button type="submit">Register</button>
 
-      <div>
-        <label for="confirmPassword">Confirm Pasword</label>
-        <input
-          v-model="confirmPassword"
-          id="confirmPasword"
-          placeholder="Type your password again"
-          type="password"
-          required
-        />
-      </div>
+  </form>
 
-      <button type="submit">Sign Up</button>
-
-    </form>
-
-  </div>
-  
-  <br>
   <PersonalRouter :route="route" :buttonText="buttonText" />
 </template>
 
 <script setup>
-// import PersonalRouter from "./PersonalRouter.vue";
-import { useRouter } from "vue-router";
 import PersonalRouter from "./PersonalRouter.vue";
-import { supabase } from "../supabase";
+import { useRouter } from "vue-router";
 import { ref } from "vue";
+import { supabase } from '../supabase'
 
 // Route Variables
 const route = "/auth/login";
-const buttonText = "Already have an account?";
-const redirect = useRouter();
+const buttonText = "Test the Sign In Route";
 
 // Input Fields
-const email = ref(null);
-const password = ref(null);
-const confirmPassword = ref(null);
+const router = useRouter();
+const email = ref("");
+const password = ref("");
+const confirmPassword = ref("");
 
 // Error Message
-const errorMsg = ref(null);
+const errorMsg = ref("");
 
 // Show hide password variable
 
 // Show hide confrimPassword variable
 
-// Sign up function
+// Router to push user once SignedUp to Log In
+const redirect = useRouter();
 
+// Arrow function to SignUp user to supaBase with a timeOut() method for showing the error
 const signUp = async () => {
-  //check is two passwords are the same
   if (password.value === confirmPassword.value) {
     try {
-      // deconstruct the response and only grab the error
       const { error } = await supabase.auth.signUp({
         email: email.value,
         password: password.value,
       });
-      // detect errors that supabase can throw
       if (error) throw error;
-      // if no errors, send them to the login webpage
-      // route.push({name: "Login"})
-      redirect.push({ path: "/auth/login" });
-    } catch(error) {
+      redirect.push({ path: "login" });
+    }
+    catch(error) {
       errorMsg.value = error.message;
-      // remove the error after 5 seconds
       setTimeout(() => {
         errorMsg.value = null;
       }, 5000)
     }
     return;
   }
-  errorMsg.value = "Error: both passwords don't match"
+  errorMsg.value = "Error: Passwords do not match"
   setTimeout(() => {
     errorMsg.value = null;
   }, 5000)
 };
 
-// Router to push user once SignedUp to Log In
-
-// Arrow function to SignUp user to supaBase with a timeOut() method for showing the error
 </script>
 
 <style></style>

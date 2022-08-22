@@ -8,4 +8,5 @@
 
 <!-- 
 **noHints**
+se encarga de parametrizar el paso de los componentes de log in y sign out 
 -->

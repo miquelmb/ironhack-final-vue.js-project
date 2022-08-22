@@ -3,7 +3,6 @@
 </template>
 
 <script setup>
-// para empujar hacia arriba elementos hacia al padre de toglear, borrar y editar tarea añadida. Encapsula los emits en un array
 // const emit = defineEmits([
 //   ENTER-EMITS-HERE
 // ])
