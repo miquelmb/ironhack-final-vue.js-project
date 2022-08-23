@@ -1,12 +1,12 @@
 <template>
+
   <nav class="navbar">
 
-    <p>Hello user!</p>
+    <p>Hello, {{mailWithoutClient[0]}}!</p>
+
     <button @click="signOut">Log out</button>
     
   </nav>
-
-  
 
 </template>
 
@@ -21,14 +21,17 @@ const redirect = useRouter();
 const userStore = useUserStore();
 
 // constant that calls user email from the useUserStore
+const userFullEmail = useUserStore().user.email
 
 // constant that saves the user email and cleans out the @client from the user
+const mailWithoutClient = userFullEmail.split("@")
 
 // async function that calls the signOut method from the useUserStore and pushes the user back to the Auth view.
 const signOut = (() => {
   userStore.logOut();
   redirect.push({ path: "/auth/login" });
 });
+// hace falta catch error y emitirlo?
 
 </script>
 

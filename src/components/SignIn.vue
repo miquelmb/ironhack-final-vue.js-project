@@ -2,16 +2,20 @@
 
   <div>Sign In</div>
 
+  <div v-if="errorMsg">
+    <p>{{ errorMsg}}</p>
+  </div>
+
   <form @submit.prevent="signIn">
   
     <div>
       <label for="email">Email</label>
-      <input type="email" required id="email" v-model="email">
+      <input type="email" required id="email" v-model="email" placeholder="Enter your user email">
     </div>
 
     <div>
       <label for="password">Password</label>
-      <input type="password" required id="password" v-model="password">
+      <input type="password" required id="password" v-model="password" placeholder="Enter your password">
     </div>
 
     <button type="submit">Sign In</button>
@@ -41,11 +45,11 @@ const password = ref("");
 // Error Message
 const errorMsg = ref("");
 
-//Show hide password variables
-const passwordFieldType = computed(() =>
-  hidePassword.value ? "password" : "text"
-);
-const hidePassword = ref(true);
+//FALTA IMPLEMENTAR Show hide password variables
+// const passwordFieldType = computed(() =>
+//   hidePassword.value ? "password" : "text"
+// );
+// const hidePassword = ref(true);
 
 // Router to push user once SignedIn to the HomeView
 const redirect = useRouter();
@@ -53,13 +57,9 @@ const redirect = useRouter();
 // Arrow function to Signin user to supaBase
 const signIn = async () => {
   try {
-    const {error} = await supabase.auth.signIn({
-      email: email.value,
-      password: password.value,
-    });
-    if (error) throw error;
+    await useUserStore().signIn(email.value, password.value);
     redirect.push({ path: "/" });
-  } catch(error) {
+  } catch (error) {
     errorMsg.value = `Error: ${error.message}`;
     setTimeout(() => {
       errorMsg.value = null;

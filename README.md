@@ -7,23 +7,25 @@
 
 ## Project Timeline
 
-<br><br>
+<br>
 
 ### 18th August
 
 - Supabase account created and linked with the project
 - Project Boiler Plate downloaded and Git working.
 
-<br>
-
 ### 19th August
 
 - Sign in functionality working. 
 - Log in user functionality working. All problems with error 422 solved
 
-<br>
-
 ### 22nd August
+
+- Sign out functionality working.
+- Unable to fetch data from user from supabase
+- Reading documentation and trying to understand everything...
+
+### 23nd August
 
 - Sign out functionality working.
 - Unable to fetch data from user from supabase
