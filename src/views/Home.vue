@@ -3,7 +3,14 @@
   <Nav />
   <!-- sends the generated task to the backend -->
   <NewTask @addTask="taskToBackend"/>
-  <TaskItem :task="task" v-for="task in tasks" :key="task.id"/>
+  <TaskItem
+    v-for="task in tasks"
+    :key="task.id"
+    :task="task"
+    @deleteTask="deleteOneTask"
+    @editTask="editOneTask"
+    @taskDone="doneOneTask"
+  />
   <!-- task item calls the emit generated in NewTask called addTask -->
   <Footer class="footer" />
 
@@ -33,6 +40,21 @@ tasksArray();
 
 const taskToBackend = async (taskTitle, taskDescription) => {
   await taskStore.addTask(taskTitle, taskDescription);
+  tasksArray();
+};
+
+const editOneTask = async (editedTask) => {
+  const res = await taskStore.updateTask(editedTask.id, editedTask.title, editedTask.description);
+  tasksArray();
+};
+
+const deleteOneTask = async (id) => {
+  await taskStore.deleteTask(id);
+  tasksArray();
+};
+
+const doneOneTask = async (id) => {
+  await taskStore.toggleReminder(id)
   tasksArray();
 };
 

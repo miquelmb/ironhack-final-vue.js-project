@@ -1,26 +1,31 @@
 <template>
 
-  <div>Sign In</div>
+  <div>
 
-  <div v-if="errorMsg">
-    <p>{{ errorMsg}}</p>
+    <div>Sign In</div>
+  
+    <div v-if="errorMsg">
+      <p>{{ errorMsg}}</p>
+    </div>
+  
+    <form @submit.prevent="signIn">
+    
+      <div>
+        <label for="email">Email</label>
+        <input type="email" required id="email" v-model="email" placeholder="Enter your user email">
+      </div>
+  
+      <div>
+        <label for="password">Password</label>
+        <input type="password" required id="password" v-model="password" placeholder="Enter your password">
+      </div>
+  
+      <button type="submit">Sign In</button>
+  
+    </form>
+
   </div>
 
-  <form @submit.prevent="signIn">
-  
-    <div>
-      <label for="email">Email</label>
-      <input type="email" required id="email" v-model="email" placeholder="Enter your user email">
-    </div>
-
-    <div>
-      <label for="password">Password</label>
-      <input type="password" required id="password" v-model="password" placeholder="Enter your password">
-    </div>
-
-    <button type="submit">Sign In</button>
-
-  </form>
 
   <PersonalRouter :route="route" :buttonText="buttonText" />
 

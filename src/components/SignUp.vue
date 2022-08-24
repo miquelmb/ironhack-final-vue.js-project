@@ -1,5 +1,5 @@
 <template>
-  <div>Sign Up</div>
+  <div class>Sign Up</div>
 
   <div v-if="errorMsg">
     <p>{{ errorMsg}}</p>
@@ -102,5 +102,3 @@ const signUp = async () => {
 };
 
 </script>
-
-<style></style>

@@ -3,13 +3,21 @@
 
     <!-- buttons -->
     <div class="buttons">
-      <button>Done</button>
-      <button>Edit</button>
-      <button>delete</button>
+      <button @click="completedTask"><span v-if="taskBool">Undone</span><span v-if="!taskBool">Done</span></button>
+      <button @click="editTask">Edit</button>
+      <button @click="deleteTask">Delete</button>
+    </div>
+
+    <div v-if="enableEdit">
+      <form @submit.prevent="editTask">
+        <input v-model="taskTitle.value" type="text" placeholder="Task new title" />
+        <input v-model="taskDescription.value" type="text" placeholder="Task new description" />
+        <button type="submit">Edit Task</button>
+      </form>
     </div>
 
     <!-- inputs -->
-    <div>
+    <div v-if="!enableEdit">
       <h2>{{ task.title }}</h2>
       <p>{{ task.description }}</p>
     </div>
@@ -27,21 +35,42 @@ import { useRouter } from "vue-router";
 import { useTaskStore } from "../stores/task";
 import { storeToRefs } from "pinia";
 
-const taskTitle = ref("");
+let taskTitle = ref("");
 
-const taskDescription = ref("");
+let taskDescription = ref("");
 
-const taskBoolean = ref(false);
+const taskBool = ref("");
 
-const errorMsg = ref("");
+// const errorMsg = ref("");
 
-const showError = ref("");
+// const showError = ref("");
 
-const showEditBar =  ref("");
+const enableEdit = ref("");
 
 const props = defineProps(['task']);
 
-const emit = defineEmits([]);
+const completedTask = () => {
+  emit("taskDone", props.task.id);
+  taskBool.value = !taskBool.value;
+};
+
+const deleteTask = () => {
+  emit("deleteTask", props.task.id)
+}
+
+const editTask = () => {
+  enableEdit.value = !enableEdit.value;
+  let editedTask = {
+      id: props.task.id,
+      title: taskTitle.value,
+      description: taskDescription.value,
+    };
+  emit("editTask", editedTask);
+  taskTitle.value = ref("");
+  taskDescription.value = ref("");
+}
+
+const emit = defineEmits(["deleteTask", "editTask", "taskDone"]);
 
 </script>
 
