@@ -21,7 +21,6 @@ export const useTaskStore = defineStore("tasks", {
     
     // sends a task to the backend. Updates de tasks data from supabase.
     async addTask(title, description) {
-      console.log(useUserStore().user.id);
       const { data, error } = await supabase.from("tasks").insert([
         {
           user_id: useUserStore().user.id,
@@ -49,8 +48,6 @@ export const useTaskStore = defineStore("tasks", {
         .update({ 'is_complete': toggleValue })
         .eq('id', taskId);
     },
-
-    
   },
 
 });

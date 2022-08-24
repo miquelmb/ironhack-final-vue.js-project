@@ -6,8 +6,8 @@
     <!-- form -->
     <form @submit.prevent="addTask">
 
-      <h3>Your turn to add a task, {{ userID }}</h3>
-
+      <!-- <h3>Your turn to add a task, {{ userID }}</h3> -->
+      
       <input v-model="taskTitle" type="text" placeholder="Task Title" />
       <input v-model="taskDescription" type="text" placeholder="Description" />
       <button type="submit">Add Task</button>
@@ -25,12 +25,11 @@
 <script setup>
 import { ref} from "vue";
 import { useUserStore } from "../stores/user";
+import { useTaskStore } from "../stores/task";
+import { supabase } from "../supabase";
 
-// import { useTaskStore } from "../stores/task";
-
-//proves
-
-const userID = useUserStore().user.email
+// pruebas
+// const userID = useUserStore().user.email
 
 // constant to save a variable that define the custom event that will be emitted to the homeView
 const emit = defineEmits(['addTask'])
