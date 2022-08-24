@@ -49,6 +49,8 @@ export const useTaskStore = defineStore("tasks", {
         .update({ 'is_complete': toggleValue })
         .eq('id', taskId);
     },
+
+    
   },
 
 });
