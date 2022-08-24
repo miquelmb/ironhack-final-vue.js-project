@@ -1,8 +1,8 @@
 # Vue.js Final Project at Ironhack
 
-- Running on Vue 3, with the composition API
+- Running on Vue 3
 - State management tool: Pinia
-- Backend with Supabase
+- Backend: Supabase
 - CSS Framework: Tailwind CSS
 
 ## Project Timeline
@@ -27,6 +27,4 @@
 
 ### 23nd August
 
-- Sign out functionality working.
-- Unable to fetch data from user from supabase
-- Reading documentation and trying to understand everything...
+- Fetching data from user from supabase

@@ -9,6 +9,7 @@ export const useTaskStore = defineStore("tasks", {
   }),
 
   actions: {
+    // gets tasks from supabase and fills the tasks variable with them
     async fetchTasks() {
       const { data: tasks } = await supabase
         .from("tasks")
@@ -18,6 +19,7 @@ export const useTaskStore = defineStore("tasks", {
       return this.tasks;
     },
     
+    // sends a task to the backend. Updates de tasks data from supabase.
     async addTask(title, description) {
       console.log(useUserStore().user.id);
       const { data, error } = await supabase.from("tasks").insert([
@@ -29,5 +31,24 @@ export const useTaskStore = defineStore("tasks", {
         },
       ]);
     },
+
+    // deletes a task from supabase. 
+    async deleteTask(taskId) {
+      console.log(useUserStore().user.id);
+      const { data, error } = await supabase
+        .from('tasks')
+        .delete()
+        .eq('id', taskId);
+    },
+
+    
+    async toggleReminder(taskId, toggleValue) {
+      console.log(useUserStore().user.id);
+      const { data, error } = await supabase
+        .from('tasks')
+        .update({ 'is_complete': toggleValue })
+        .eq('id', taskId);
+    },
   },
+
 });

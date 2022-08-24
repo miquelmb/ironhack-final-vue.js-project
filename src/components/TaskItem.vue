@@ -1,5 +1,5 @@
 <template>
-  <div>Task Item Component</div>
+  <div>TASK ITEM</div>
 </template>
 
 <script setup>
@@ -10,7 +10,6 @@
 // const props = defineProps(["ENTER-PROP-HERE"]);
 </script>
 
-<style></style>
 
 <!-- 
 **Hints**

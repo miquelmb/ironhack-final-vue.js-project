@@ -3,11 +3,15 @@
   <div>
 
     <h2>Add a new task</h2>
-
+    <!-- form -->
     <form @submit.prevent="addTask">
-      <input v-model="title" type="text" placeholder="Task Title" />
-      <input v-model="description" type="text" placeholder="Description" />
+
+      <h3>Your turn to add a task, {{ userID }}</h3>
+
+      <input v-model="taskTitle" type="text" placeholder="Task Title" />
+      <input v-model="taskDescription" type="text" placeholder="Description" />
       <button type="submit">Add Task</button>
+
     </form>
 
     <div v-if="errorMsg">
@@ -20,25 +24,49 @@
 
 <script setup>
 import { ref} from "vue";
-import { useTaskStore } from "../stores/task";
+import { useUserStore } from "../stores/user";
+
+// import { useTaskStore } from "../stores/task";
+
+//proves
+
+const userID = useUserStore().user.email
 
 // constant to save a variable that define the custom event that will be emitted to the homeView
-// EMIT?
+const emit = defineEmits(['addTask'])
 
 // constant to save a variable that holds the value of the title input field of the new task
-const title = ref("");
+const taskTitle = ref("");
 
 // constant to save a variable that holds the value of the description input field of the new task
-const description = ref("");
-
-// constant to save a variable that holds an initial false boolean value for the errorMessage container that is conditionally displayed depending if the input field is empty. HACE FALTA?
+const taskDescription = ref("");
 
 // const constant to save a variable that holds the value of the error message
-const errorMsg = ref("");
+const errorMsg = ref(null);
 
 // arrow function to call the form holding the task title and task description that uses a conditional to first checks if the task title is empty, if true the error message is displayed through the errorMessage container and sets a timeOut method that hides the error after some time. Else, its emmits a custom event to the home view with the task title and task description; clears the task title and task description input fields.
-const addTask = async () => {};
+// ERROR HANDLING DEJA LOS "" un rato.. DEBERÍA SER ASYNC?
+const addTask = async () => {
+  if (!taskTitle.value && !taskDescription.value) {
+    errorMsg.value = "Please insert a title and a description";
+      setTimeout(() => {
+        errorMsg.value = null;
+      }, 5000); 
+  } else if (!taskDescription.value) {
+    errorMsg.value = "You must insert a description";
+      setTimeout(() => {
+        errorMsg.value = null;
+      }, 5000);
+  } else if (!taskTitle.value) {
+    errorMsg.value = "You must insert a title";
+      setTimeout(() => {
+        errorMsg.value = null;
+      }, 5000);
+  } else {
+    emit("addTask", taskTitle.value, taskDescription.value);
+    taskTitle.value = "";
+    taskDescription.value = "";
+  }
+};
 
 </script>
-
-<style></style>
