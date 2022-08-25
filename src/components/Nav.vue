@@ -2,7 +2,7 @@
 
 <header class="bg-gradient-to-r from-white via-zinc-100 to-blue-500 w-screen">
   
-  <nav class="container w-screen border-none py-5 px-4 m-0 flex-row gap-2 justify-between items-center">
+  <nav class="w-screen border-none py-5 px-4 flex m-0 gap-2 justify-between">
 
     <i>
       <img class="w-28" src="https://res.cloudinary.com/mmabof89/image/upload/v1661428924/Ironhack%20Final%20Project/TaskApp_azo7ck.png" alt="Task App Logo">

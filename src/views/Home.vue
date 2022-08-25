@@ -3,14 +3,17 @@
   <Nav />
   <!-- sends the generated task to the backend -->
   <NewTask @addTask="taskToBackend"/>
-  <TaskItem
-    v-for="task in tasks"
-    :key="task.id"
-    :task="task"
-    @deleteTask="deleteOneTask"
-    @editTask="editOneTask"
-    @taskDone="doneOneTask"
-  />
+
+  <div class="bg-red-200 grid p-5">
+    <TaskItem
+      v-for="task in tasks"
+      :key="task.id"
+      :task="task"
+      @deleteTask="deleteOneTask"
+      @editTask="editOneTask"
+      @taskDone="doneOneTask"
+    />
+  </div>
   <!-- task item calls the emit generated in NewTask called addTask -->
   <Footer class="footer" />
 

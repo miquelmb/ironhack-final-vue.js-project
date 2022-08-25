@@ -1,28 +1,30 @@
 <template>
-  <div class="container">
 
-    <!-- buttons -->
-    <div class="buttons">
-      <button @click="completedTask"><span v-if="task.is_complete">Undone</span><span v-if="!task.is_complete">Done</span></button>
-      <button @click="editTask">Edit</button>
-      <button @click="deleteTask">Delete</button>
+    <!-- card -->
+    <div class="container w-2/5 m-auto mb-8">
+
+      <!-- buttons -->
+      <div class="buttons">
+        <button @click="completedTask"><span v-if="task.is_complete">Undone</span><span v-if="!task.is_complete">Done</span></button>
+        <button @click="editTask">Edit</button>
+        <button @click="deleteTask">Delete</button>
+      </div>
+
+      <div v-if="enableEdit">
+        <form @submit.prevent="editTask">
+          <input v-model="taskTitle" type="text" placeholder="Task new title" />
+          <input v-model="taskDescription" type="text" placeholder="Task new description" />
+          <button type="submit">Edit Task</button>
+        </form>
+      </div>
+
+      <!-- inputs -->
+      <div v-if="!enableEdit">
+        <h2>{{ task.title }}</h2>
+        <p>{{ task.description }}</p>
+      </div>
+
     </div>
-
-    <div v-if="enableEdit">
-      <form @submit.prevent="editTask">
-        <input v-model="taskTitle" type="text" placeholder="Task new title" />
-        <input v-model="taskDescription" type="text" placeholder="Task new description" />
-        <button type="submit">Edit Task</button>
-      </form>
-    </div>
-
-    <!-- inputs -->
-    <div v-if="!enableEdit">
-      <h2>{{ task.title }}</h2>
-      <p>{{ task.description }}</p>
-    </div>
-
-  </div>
 
 
 </template>
