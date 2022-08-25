@@ -53,8 +53,8 @@ const deleteOneTask = async (id) => {
   tasksArray();
 };
 
-const doneOneTask = async (id) => {
-  await taskStore.toggleReminder(id)
+const doneOneTask = async (task) => {
+  await taskStore.toggleReminder(task)
   tasksArray();
 };
 

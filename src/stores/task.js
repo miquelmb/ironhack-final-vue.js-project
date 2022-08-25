@@ -48,11 +48,11 @@ export const useTaskStore = defineStore("tasks", {
         .match({ id: id });
     },
     
-    async toggleReminder(taskId) {
+    async toggleReminder(task) {
       const { data, error } = await supabase
         .from('tasks')
-        .update({ 'is_complete': !is_complete })
-        .eq('id', taskId);
+        .update({ 'is_complete': !task.is_complete })
+        .eq('id', task.id);
     },
   },
 

@@ -3,15 +3,15 @@
 
     <!-- buttons -->
     <div class="buttons">
-      <button @click="completedTask"><span v-if="taskBool">Undone</span><span v-if="!taskBool">Done</span></button>
+      <button @click="completedTask"><span v-if="task.is_complete">Undone</span><span v-if="!task.is_complete">Done</span></button>
       <button @click="editTask">Edit</button>
       <button @click="deleteTask">Delete</button>
     </div>
 
     <div v-if="enableEdit">
       <form @submit.prevent="editTask">
-        <input v-model="taskTitle.value" type="text" placeholder="Task new title" />
-        <input v-model="taskDescription.value" type="text" placeholder="Task new description" />
+        <input v-model="taskTitle" type="text" placeholder="Task new title" />
+        <input v-model="taskDescription" type="text" placeholder="Task new description" />
         <button type="submit">Edit Task</button>
       </form>
     </div>
@@ -50,7 +50,7 @@ const enableEdit = ref("");
 const props = defineProps(['task']);
 
 const completedTask = () => {
-  emit("taskDone", props.task.id);
+  emit("taskDone", props.task);
   taskBool.value = !taskBool.value;
 };
 
@@ -66,8 +66,8 @@ const editTask = () => {
       description: taskDescription.value,
     };
   emit("editTask", editedTask);
-  taskTitle.value = ref("");
-  taskDescription.value = ref("");
+  taskTitle.value = props.task.title;
+  taskDescription.value = props.task.description;
 }
 
 const emit = defineEmits(["deleteTask", "editTask", "taskDone"]);
