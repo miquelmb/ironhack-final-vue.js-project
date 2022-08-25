@@ -2,8 +2,8 @@
 
   <div>
 
-    <h1 class="font-dosis text-8xl text-center my-8 font-medium text-slate-800">TaskApp</h1>
-    <p v-if="!errorMsg" class="font-dosis m-auto mb-7 text-2xl text-center text-slate-700 my-4 w-4/5">The place where your procrastinating ends..</p>
+    <h1 class="font-dosis text-7xl text-center my-8 font-medium text-slate-800">TaskApp</h1>
+    <p v-if="!errorMsg" class="font-dosis m-auto mb-7 text-xl text-center text-slate-700 my-4 w-4/5">The place where your procrastinating ends..</p>
   
     <div v-if="errorMsg" class="mb-10 p-4 rounded-md bg-light-grey text-center shadow-lg text-red-800 bg-zinc-300 bg-opacity-70">
       <p>{{ errorMsg}}</p>
