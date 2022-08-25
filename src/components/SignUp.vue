@@ -16,17 +16,21 @@
         <input type="email" class="font-dosis p-2 text-gray-500 focus:outline-slate-200 focus:outline-none" required id="email" v-model="email" placeholder="Enter your email">
       </div>
   
-      <div class="flex flex-col mb-2">
+      <div class="flex flex-col mb-2 relative">
         <label for="password" class="font-dosis font-medium mb-1 text-sm text-slate-800">Password</label>
-        <input type="password" class="font-dosis p-2 text-gray-500 focus:outline-slate-200 focus:outline-none" required id="password" v-model="password" placeholder="Enter your password">
+        <input :type="passwordFieldType" class="font-dosis p-2 text-gray-500 focus:outline-slate-200 focus:outline-none" required id="password" v-model="password" placeholder="Type your password">
+        <i v-if="hidePassword === true" @click="hidePassword = !hidePassword" class="fa-solid fa-eye absolute top-9 right-3"></i>
+        <i v-else @click="hidePassword = !hidePassword" class="fa-solid fa-eye-slash absolute top-9 right-3"></i>
       </div>
   
-      <div class="flex flex-col mb-2">
+      <div class="flex flex-col mb-2 relative">
         <label for="confirmPassword" class="font-dosis font-medium mb-1 text-sm text-slate-800">Confirm your password</label>
-        <input type="password" class="font-dosis p-2 text-gray-500 focus:outline-slate-200 focus:outline-none" required id="confirmPassword" v-model="confirmPassword" placeholder="Repeat your password">
+        <input :type="confirmPasswordFieldType" class="font-dosis p-2 text-gray-500 focus:outline-slate-200 focus:outline-none" required id="confirmPassword" v-model="confirmPassword" placeholder="Repeat your password">
+        <i v-if="hideConfirmPassword === true" @click="hideConfirmPassword = !hideConfirmPassword" class="fa-solid fa-eye absolute top-9 right-3"></i>
+        <i v-else @click="hideConfirmPassword = !hideConfirmPassword" class="fa-solid fa-eye-slash absolute top-9 right-3"></i>
       </div>
   
-      <button type="submit" class="font-dosis mt-6 py-2 px-6 rounded-sm self-center text-center text-slate-200 text-sm text-slate-100 bg-gray-700
+      <button type="submit" class="font-dosis mt-6 py-2 px-6 rounded-sm self-center text-center text-sm text-slate-100 bg-gray-700
       duration-200 border-solid border-lg border-transparent hover:border-white hover:bg-gray-200 hover:text-gray-700">REGISTER</button>
   
     </form>
@@ -45,7 +49,7 @@
 <script setup>
 import PersonalRouter from "./PersonalRouter.vue";
 import { useRouter } from "vue-router";
-import { ref } from "vue";
+import { ref, computed} from "vue";
 import { useUserStore } from "../stores/user";
 import { supabase } from '../supabase'
 
@@ -62,37 +66,20 @@ const confirmPassword = ref("");
 // Error Message
 const errorMsg = ref("");
 
-// FALTA IMPLEMENTAR Show hide password variable
+const passwordFieldType = computed(() =>
+  hidePassword.value ? "password" : "text"
+);
 
-// Show hide confrimPassword variable
+const hidePassword = ref(true);
+
+const confirmPasswordFieldType = computed(() =>
+  hideConfirmPassword.value ? "password" : "text"
+);
+
+const hideConfirmPassword = ref(true);
 
 // Router to push user once SignedUp to Log In
 const redirect = useRouter();
-
-// Arrow function to SignUp user to supaBase with a timeOut() method for showing the error. Función de Traversy Media sin usar Store
-// const signUp = async () => {
-//   if (password.value === confirmPassword.value) {
-//     try {
-//       const { error } = await supabase.auth.signUp({
-//         email: email.value,
-//         password: password.value,
-//       });
-//       if (error) throw error;
-//       redirect.push({ path: "login" });
-//     }
-//     catch(error) {
-//       errorMsg.value = error.message;
-//       setTimeout(() => {
-//         errorMsg.value = null;
-//       }, 5000)
-//     }
-//     return;
-//   }
-//   errorMsg.value = "Error: Passwords do not match"
-//   setTimeout(() => {
-//     errorMsg.value = null;
-//   }, 5000)
-// };
 
 const signUp = async () => {
   if (password.value === confirmPassword.value) {
@@ -108,6 +95,8 @@ const signUp = async () => {
     return;
   }
   errorMsg.value = "Error: Passwords do not match";
+  console.log(password.value)
+  console.log(confirmPassword.value)
   setTimeout(() => {
     errorMsg.value = null;
   }, 5000)

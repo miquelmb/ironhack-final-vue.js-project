@@ -4,7 +4,7 @@
   <!-- sends the generated task to the backend -->
   <NewTask @addTask="taskToBackend"/>
 
-  <div class="bg-red-200 grid p-5">
+  <div class="flex flex-wrap gap-8 p-5 w-11/12 m-auto">
     <TaskItem
       v-for="task in tasks"
       :key="task.id"

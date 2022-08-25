@@ -9,7 +9,7 @@
     </i>
 
     <div class="flex gap-12 items-center" >
-      <p class="font-dosis text-lg text-zinc-100">Hello, {{mailWithoutClient[0]}}!</p>
+      <p class="hidden md:block font-dosis text-lg text-grey">Hello, {{mailWithoutClient[0]}}!</p>
       <button class="font-dosis text-lg py-3 px-8 rounded-lg self-center 
       text-center text-slate-200 bg-gray-800 duration-200 border-lg
       border-transparent hover:border-white hover:bg-gray-200 hover:text-gray-700" @click="signOut">Log out</button>

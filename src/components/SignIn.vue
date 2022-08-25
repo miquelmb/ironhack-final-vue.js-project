@@ -16,12 +16,14 @@
         <input type="email" class="font-dosis p-2 text-gray-500 focus:outline-slate-200 focus:outline-none" required id="email" v-model="email" placeholder="Enter your user email">
       </div>
 
-      <div class="flex flex-col mb-2">
+      <div class="flex flex-col mb-2 relative">
         <label for="password" class="font-dosis font-medium mb-1 text-sm text-slate-800">Password</label>
-        <input type="password" class="font-dosis p-2 text-gray-500 focus:outline-slate-200 focus:outline-none" required id="password" v-model="password" placeholder="Enter your password">
+        <input :type="passwordFieldType" class="font-dosis p-2 text-gray-500 focus:outline-slate-200 focus:outline-none" required id="password" v-model="password" placeholder="Enter your password">
+        <i v-if="hidePassword === true" @click="hidePassword = !hidePassword" class="fa-solid fa-eye absolute top-9 right-3"></i>
+        <i v-else @click="hidePassword = !hidePassword" class="fa-solid fa-eye-slash absolute top-9 right-3"></i>
       </div>
 
-      <button type="submit" class="font-dosis mt-6 py-2 px-6 rounded-sm self-center text-center text-slate-200 text-sm text-slate-100 bg-gray-700
+      <button type="submit" class="font-dosis mt-6 py-2 px-6 rounded-sm self-center text-center text-sm text-slate-100 bg-gray-700
       duration-200 border-solid border-lg border-transparent hover:border-white hover:bg-gray-200 hover:text-gray-700">SIGN IN</button>
 
     </form>
@@ -53,11 +55,12 @@ const password = ref("");
 // Error Message
 const errorMsg = ref("");
 
-//FALTA IMPLEMENTAR Show hide password variables
-// const passwordFieldType = computed(() =>
-//   hidePassword.value ? "password" : "text"
-// );
-// const hidePassword = ref(true);
+//Show hide password variables
+const passwordFieldType = computed(() =>
+  hidePassword.value ? "password" : "text"
+);
+
+const hidePassword = ref(true);
 
 // Router to push user once SignedIn to the HomeView
 const redirect = useRouter();

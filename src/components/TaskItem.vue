@@ -1,27 +1,33 @@
 <template>
 
     <!-- card -->
-    <div class="container w-2/5 m-auto mb-8">
+    <div class="container border-none max-w-lg h-72 gap-8 m-auto mb-8 text-center p-8 flex flex-col rounded-md shadow-lg bg-zinc-100 bg-opacity-70 justify-center relative">
 
       <!-- buttons -->
-      <div class="buttons">
-        <button @click="completedTask"><span v-if="task.is_complete">Undone</span><span v-if="!task.is_complete">Done</span></button>
-        <button @click="editTask">Edit</button>
-        <button @click="deleteTask">Delete</button>
+      <div class="buttons absolute -top-12">
+        <button v-if="task.is_complete" class="font-dosis m-6 py-2 px-6 rounded-md text-lg self-center text-center text-slate-50 bg-green-600 opacity-100
+         duration-200 hover:border-white hover:bg-green-800 hover:text-gray-100" @click="completedTask">✔ Done</button>
+        <button v-if="!task.is_complete" class="font-dosis m-6 py-2 px-6 rounded-md text-lg self-center text-center text-slate-50 bg-red-600 opacity-100
+         duration-200 hover:border-white hover:bg-red-800 hover:text-gray-100" @click="completedTask">Undone</button>
+        <button class="font-dosis m-6 py-2 px-6 rounded-md text-lg self-center text-center text-slate-50 bg-sky-600 opacity-100
+         duration-200 hover:border-white hover:bg-sky-800 hover:text-gray-100" @click="editTask">Edit</button>
+        <button class="font-dosis m-6 py-2 px-6 rounded-md text-lg self-center text-center text-slate-50 bg-stone-500 opacity-100
+         duration-200 hover:border-white hover:bg-stone-800 hover:text-gray-100" @click="deleteTask">Delete</button>
       </div>
 
       <div v-if="enableEdit">
-        <form @submit.prevent="editTask">
-          <input v-model="taskTitle" type="text" placeholder="Task new title" />
-          <input v-model="taskDescription" type="text" placeholder="Task new description" />
-          <button type="submit">Edit Task</button>
+        <form class="relative" @submit.prevent="editThisTask">
+          <input class="font-dosis py-2 px-6 text-3xl self-center font-medium mb-2 rounded-md text-gray-900 bg-zinc-100" v-model="taskTitle" type="text" placeholder="Task new title" />
+          <input class="font-dosis py-2 px-6 text-xl self-center rounded-md text-gray-900 bg-zinc-100 italic" v-model="taskDescription" type="text" placeholder="Task new description" />
+          <button class="font-dosis m-6 py-2 px-6 rounded-md text-lg self-center text-center text-slate-50 bg-green-600 opacity-100
+            duration-200 hover:border-white hover:bg-green-800 hover:text-gray-100" type="submit">Edit Task</button>
         </form>
       </div>
 
       <!-- inputs -->
       <div v-if="!enableEdit">
-        <h2>{{ task.title }}</h2>
-        <p>{{ task.description }}</p>
+        <h2 class="font-dosis py-2 px-6 text-3xl font-medium mb-2 rounded-md text-gray-900">{{ task.title }}</h2>
+        <p class="font-dosis py-2 px-6 text-2xl rounded-md text-gray-900 italic">{{ task.description }}</p>
       </div>
 
     </div>
@@ -58,19 +64,23 @@ const completedTask = () => {
 
 const deleteTask = () => {
   emit("deleteTask", props.task.id)
-}
+};
 
 const editTask = () => {
-  enableEdit.value = !enableEdit.value;
-  let editedTask = {
-      id: props.task.id,
-      title: taskTitle.value,
-      description: taskDescription.value,
-    };
-  emit("editTask", editedTask);
+  enableEdit.value = !enableEdit.value
   taskTitle.value = props.task.title;
   taskDescription.value = props.task.description;
-}
+};
+
+const editThisTask = () => {
+  let editedTask = {
+        id: props.task.id,
+        title: taskTitle.value,
+        description: taskDescription.value,
+      };
+  emit("editTask", editedTask);
+  enableEdit.value = !enableEdit.value
+};
 
 const emit = defineEmits(["deleteTask", "editTask", "taskDone"]);
 

@@ -1,18 +1,18 @@
 <template>
 
-  <div>
+  <div class="max-w-7xl m-auto">
 
-    <h2 class="font-dosis text-3xl m-auto my-9 text-center text-slate-700 my-4 w-4/5">Add a new task</h2>
-    <p class="font-dosis text-xl m-auto my-9 text-center text-slate-700 my-4 w-4/5">Get focused! You're at {{ month }} {{ dd }}, {{ yyyy }}!</p>
+    <h2 class="font-dosis text-4xl font-medium m-auto my-9 text-center text-slate-700 w-4/5">Add a new task</h2>
+    <p class="font-dosis text-2xl m-auto my-9 text-center text-slate-700 w-4/5">Get focused! You're at {{ month }} {{ dd }}, {{ yyyy }}!</p>
     <!-- form -->
-    <form class="w-2/3 text-center p-8 m-auto mb-20 flex flex-col rounded-md shadow-lg bg-zinc-100 bg-opacity-70 justify-center" @submit.prevent="addTask">
+    <form class="w-2/3 text-center p-8 m-auto mb-10 flex flex-col rounded-md shadow-lg bg-zinc-100 bg-opacity-70 justify-center" @submit.prevent="addTask">
       <input class="font-dosis p-2 m-3 text-gray-500 focus:outline-slate-200 focus:outline-none" v-model="taskTitle" type="text" placeholder="Task Title" />
       <input class="font-dosis p-2 m-3 text-gray-500 focus:outline-slate-200 focus:outline-none" v-model="taskDescription" type="text" placeholder="Description" />
-      <button class="font-dosis mt-6 py-2 px-6 rounded-sm self-center text-center text-slate-200 text-lg text-slate-100 bg-gray-700
+      <button class="font-dosis mt-6 py-2 px-6 rounded-lg self-center text-center text-lg text-slate-100 bg-gray-700
       duration-200 border-solid border-lg border-transparent hover:border-white hover:bg-gray-300 hover:text-gray-700" type="submit">Add Task</button>
     </form>
 
-    <div v-if="errorMsg">
+    <div class="w-1/2 text-center p-4 m-auto mb-20 flex flex-col text-red-800 rounded-md shadow-lg bg-zinc-100 bg-opacity-70 justify-center" v-if="errorMsg">
         <p>{{ errorMsg }}</p>
     </div>
 
@@ -83,17 +83,17 @@ const addTask = async () => {
     errorMsg.value = "Please insert a title and a description";
       setTimeout(() => {
         errorMsg.value = null;
-      }, 5000); 
+      }, 4000); 
   } else if (!taskDescription.value) {
-    errorMsg.value = "You must insert a description";
+    errorMsg.value = "A description must be inserted";
       setTimeout(() => {
         errorMsg.value = null;
-      }, 5000);
+      }, 4000);
   } else if (!taskTitle.value) {
-    errorMsg.value = "You must insert a title";
+    errorMsg.value = "A title must be inserted";
       setTimeout(() => {
         errorMsg.value = null;
-      }, 5000);
+      }, 4000);
   } else {
     emit("addTask", taskTitle.value, taskDescription.value);
     taskTitle.value = "";
