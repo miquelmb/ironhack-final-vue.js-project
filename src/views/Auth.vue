@@ -1,12 +1,12 @@
 <template>
 
-    <div class="container m-auto"> 
+  <div class="container h-screen flex-col self-center md:flex-row border-none items-center justify-center max-w-full bg-postItsBackground bg-no-repeat bg-center bg-opacity-90">
+    
+    <div class="container border-none p-8 w-1/4 m-6"> 
       <router-view></router-view>
     </div>
 
-    <div>
-      <img src="https://images.unsplash.com/photo-1626757431530-7a28db690a5c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=882&q=80" alt="" >
-    </div>
+  </div>
 
 </template>
 
