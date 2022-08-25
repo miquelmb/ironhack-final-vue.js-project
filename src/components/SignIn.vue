@@ -28,7 +28,7 @@
 
   </div>
 
-  <PersonalRouter class="font-dosis text-lg my-8 py-3 px-6 rounded-full self-center 
+  <PersonalRouter class="font-dosis text-lg my-8 py-3 px-6 rounded-lg self-center 
   text-center text-slate-200 bg-gray-800 duration-200 border-solid border-lg
   border-transparent hover:border-white hover:bg-gray-200 hover:text-gray-700" :route="route" :buttonText="buttonText" />
 
