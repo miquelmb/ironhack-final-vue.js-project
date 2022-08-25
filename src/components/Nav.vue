@@ -1,12 +1,23 @@
 <template>
 
-  <nav class="navbar">
+<header class="bg-gradient-to-r from-white via-zinc-100 to-blue-500 w-screen">
+  
+  <nav class="container w-screen border-none py-5 px-4 m-0 flex-row gap-2 justify-between items-center">
 
-    <p>Hello, {{mailWithoutClient[0]}}!</p>
+    <i>
+      <img class="w-28" src="https://res.cloudinary.com/mmabof89/image/upload/v1661428924/Ironhack%20Final%20Project/TaskApp_azo7ck.png" alt="Task App Logo">
+    </i>
 
-    <button @click="signOut">Log out</button>
-    
+    <div class="flex gap-12 items-center" >
+      <p class="font-dosis text-lg text-zinc-100">Hello, {{mailWithoutClient[0]}}!</p>
+      <button class="font-dosis text-lg py-3 px-8 rounded-lg self-center 
+      text-center text-slate-200 bg-gray-800 duration-200 border-lg
+      border-transparent hover:border-white hover:bg-gray-200 hover:text-gray-700" @click="signOut">Log out</button>
+    </div>
+  
   </nav>
+
+</header>
 
 </template>
 
@@ -34,12 +45,3 @@ const signOut = (() => {
 // hace falta catch error y emitirlo?
 
 </script>
-
-<style>
-
-.navbar {
-  display: flex;
-  justify-content: space-around;
-}
-
-</style>

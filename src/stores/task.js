@@ -6,6 +6,7 @@ export const useTaskStore = defineStore("tasks", {
 
   state: () => ({
     tasks: null,
+    year: '2022'
   }),
 
   actions: {

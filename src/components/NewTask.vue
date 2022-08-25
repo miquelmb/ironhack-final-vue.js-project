@@ -2,9 +2,11 @@
 
   <div>
 
-    <h2>Add a new task</h2>
+    <h2 class="font-dosis text-3xl m-auto my-9 text-center text-slate-700 my-4 w-4/5">Add a new task</h2>
     <!-- form -->
     <form @submit.prevent="addTask">
+
+    <p class="font-dosis text-xl m-auto my-9 text-center text-slate-700 my-4 w-4/5">Get focused! You're at {{ month }} {{ dd }}, {{ yyyy }}!</p>
 
       <!-- <h3>Your turn to add a task, {{ userID }}</h3> -->
       
@@ -30,6 +32,41 @@ import { supabase } from "../supabase";
 
 // pruebas
 // const userID = useUserStore().user.email
+// get today's date
+let today = new Date();
+console.log(today)
+let dd = String(today.getDate()).padStart(2, '0');
+let mm = String(today.getMonth() + 1).padStart(2, '0');
+let yyyy = today.getFullYear();
+
+let month = "";
+if (mm === "01") {
+  month = 'January'
+} else if (mm === "02") {
+  month = 'February'
+} else if (mm === "03") {
+  month = 'March'
+} else if (mm === "04") {
+  month = 'April'
+} else if (mm === "05") {
+  month = 'May'
+} else if (mm === "06") {
+  month = 'June'
+} else if (mm === "07") {
+  month = 'July'
+} else if (mm === "08") {
+  month = 'August'
+} else if (mm === "09") {
+  month = 'September'
+} else if (mm === "10") {
+  month = 'October'
+} else if (mm === "11") {
+  month = 'November'
+} else if (mm === "12") {
+  month = 'December'
+} else {
+  month = 'Wrong month!'
+};
 
 // constant to save a variable that define the custom event that will be emitted to the homeView
 const emit = defineEmits(['addTask'])
