@@ -37,18 +37,18 @@ Project preview:
 ### 23nd August
 
 - Fetching user details from & to Supabase
-- Getting to work create task funcionality and uploading data to the task table at Supabase
+- Getting to work create task functionality and uploading data to the task table at Supabase
 
 ### 24th August
 
-- Continue getting to work create task funcionality and uploading data to the task table at Supabase 
+- Continue getting to work create task functionality and uploading data to the task table at Supabase 
 - Create cards for each task added, getting all the information that the user added at Supabase.
-- Create edit button, mark as done/undone button and delete button, and its funtionallity.
+- Create edit button, mark as done/undone button and delete button, and its funtionality.
 
 ### 25th August
 
-- Making all the desing with Tailwind CSS.
-- Deploy to vercel. Adjusting fonts (in Vercel all text was looking bigger than with the VSC live developement)
+- Making all the design with Tailwind CSS.
+- Deploy to Vercel. Adjusting fonts (in Vercel all text was looking bigger than with the VSC live developement)
 
 ### 26th August
 
