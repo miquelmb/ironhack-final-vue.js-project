@@ -1,26 +1,26 @@
 <template>
 
     <!-- card -->
-    <div class="container border-none max-w-lg h-72 gap-8 m-auto mb-8 text-center p-8 flex flex-col rounded-md shadow-lg bg-zinc-100 bg-opacity-70 justify-center relative">
+    <div class="container border-none max-w-lg h-64 gap-8 m-auto mb-8 text-center p-8 flex flex-col rounded-md shadow-lg bg-zinc-100 bg-opacity-70 justify-center relative">
 
       <!-- buttons -->
-      <div class="buttons absolute -top-12">
-        <button v-if="task.is_complete" class="font-dosis m-6 py-2 px-6 rounded-md text-lg self-center text-center text-slate-50 bg-green-600 opacity-100
+      <div class="buttons absolute -top-8 md:-top-24">
+        <button v-if="task.is_complete" class="font-dosis py-2 px-4 rounded-md text-md self-center text-center text-slate-50 bg-green-600 opacity-100
          duration-200 hover:border-white hover:bg-green-800 hover:text-gray-100" @click="completedTask">✔ Done</button>
-        <button v-if="!task.is_complete" class="font-dosis m-6 py-2 px-6 rounded-md text-lg self-center text-center text-slate-50 bg-red-600 opacity-100
+        <button v-if="!task.is_complete" class="font-dosis py-2 px-6 rounded-md text-md self-center text-center text-slate-50 bg-red-600 opacity-100
          duration-200 hover:border-white hover:bg-red-800 hover:text-gray-100" @click="completedTask">Undone</button>
-        <button class="font-dosis m-6 py-2 px-6 rounded-md text-lg self-center text-center text-slate-50 bg-sky-600 opacity-100
+        <button class="font-dosis py-2 px-6 rounded-md text-md m-2 md:m-20 self-center text-center text-slate-50 bg-sky-600 opacity-100
          duration-200 hover:border-white hover:bg-sky-800 hover:text-gray-100" @click="editTask">Edit</button>
-        <button class="font-dosis m-6 py-2 px-6 rounded-md text-lg self-center text-center text-slate-50 bg-stone-500 opacity-100
+        <button class="font-dosis py-2 px-6 rounded-md text-md self-center text-center text-slate-50 bg-stone-500 opacity-100
          duration-200 hover:border-white hover:bg-stone-800 hover:text-gray-100" @click="deleteTask">Delete</button>
       </div>
 
       <div v-if="enableEdit">
         <form class="relative" @submit.prevent="editThisTask">
-          <input class="font-dosis py-2 px-6 text-3xl self-center font-medium mb-2 rounded-md text-gray-900 bg-zinc-100" v-model="taskTitle" type="text" placeholder="Task new title" />
-          <input class="font-dosis py-2 px-6 text-xl self-center rounded-md text-gray-900 bg-zinc-100 italic" v-model="taskDescription" type="text" placeholder="Task new description" />
-          <button class="font-dosis m-6 py-2 px-6 rounded-md text-lg self-center text-center text-slate-50 bg-green-600 opacity-100
-            duration-200 hover:border-white hover:bg-green-800 hover:text-gray-100" type="submit">Edit Task</button>
+          <input class="font-dosis py-2 px-6 text-2xl self-center text-center font-medium mb-2 rounded-md text-gray-900 bg-zinc-100" v-model="taskTitle" type="text" placeholder="Task new title" />
+          <input class="font-dosis py-2 px-6 text-xl self-center text-center rounded-md text-gray-900 bg-zinc-100 italic" v-model="taskDescription" type="text" placeholder="Task new description" />
+          <button class="font-dosis m-6 py-2 px-6 w-1/2 sm:w-1/3 rounded-md text-lg text-center text-slate-50 bg-green-600 opacity-100
+            duration-200 hover:border-white hover:bg-green-800 hover:text-gray-100 absolute left-12 -bottom-28 sm:left-32 sm:-bottom-20" type="submit">Edit Task</button>
         </form>
       </div>
 

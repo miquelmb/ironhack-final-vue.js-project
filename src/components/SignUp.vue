@@ -3,12 +3,13 @@
   <div>
 
     <h1 class="font-dosis text-7xl text-center my-8 font-medium text-slate-800">TaskApp</h1>
+    <!-- subtitle that dissapears when error handling message is shown -->
     <p v-if="!errorMsg" class="font-dosis m-auto mb-7 text-xl text-center text-slate-700 my-4 w-4/5">The place where your procrastinating ends...</p>
-  
+
     <div v-if="errorMsg" class="mb-10 p-4 rounded-md bg-light-grey text-center shadow-lg text-red-800 bg-zinc-300 bg-opacity-70">
       <p>{{ errorMsg}}</p>
     </div>
-    
+    <!-- form to register user with mail, password and confirm -->
     <form class="p-8 flex flex-col rounded-md shadow-lg bg-zinc-300 bg-opacity-70" @submit.prevent="signUp">
     
       <div class="flex flex-col mb-2">
@@ -35,15 +36,12 @@
   
     </form>
 
-
   </div>
-
 
   <PersonalRouter class="font-dosis text-lg my-8 py-3 px-6 rounded-lg self-center 
   text-center text-slate-200 bg-gray-800 duration-200 border-solid border-lg
   border-transparent hover:border-white hover:bg-gray-200 hover:text-gray-700" :route="route" :buttonText="buttonText" />
 
-  
 </template>
 
 <script setup>
@@ -66,12 +64,14 @@ const confirmPassword = ref("");
 // Error Message
 const errorMsg = ref("");
 
+// constants to show or hide password 
 const passwordFieldType = computed(() =>
   hidePassword.value ? "password" : "text"
 );
 
 const hidePassword = ref(true);
 
+// constants to show or hide confirm password 
 const confirmPasswordFieldType = computed(() =>
   hideConfirmPassword.value ? "password" : "text"
 );
@@ -95,8 +95,6 @@ const signUp = async () => {
     return;
   }
   errorMsg.value = "Error: Passwords do not match";
-  console.log(password.value)
-  console.log(confirmPassword.value)
   setTimeout(() => {
     errorMsg.value = null;
   }, 5000)

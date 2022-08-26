@@ -1,14 +1,14 @@
 <template>
 
   <div>
-
+    <!-- title and subtitle -->
     <h1 class="font-dosis text-7xl text-center my-8 font-medium text-slate-800">TaskApp</h1>
     <p v-if="!errorMsg" class="font-dosis m-auto mb-7 text-xl text-center text-slate-700 my-4 w-4/5">The place where your procrastinating ends...</p>
-  
+    <!-- error handling message -->
     <div v-if="errorMsg" class="mb-10 p-4 rounded-md bg-light-grey text-center shadow-lg text-red-800 bg-zinc-300 bg-opacity-70">
       <p>{{ errorMsg}}</p>
     </div>
-
+    <!-- form to insert email and password from a registered user -->
     <form @submit.prevent="signIn" class="p-8 flex flex-col rounded-md shadow-lg bg-zinc-300 bg-opacity-70">
 
       <div class="flex flex-col mb-2">
@@ -23,6 +23,7 @@
         <i v-else @click="hidePassword = !hidePassword" class="fa-solid fa-eye-slash absolute top-9 right-3"></i>
       </div>
 
+      <!-- button to send the full form -->
       <button type="submit" class="font-dosis mt-6 py-2 px-6 rounded-sm self-center text-center text-sm text-slate-100 bg-gray-700
       duration-200 border-solid border-lg border-transparent hover:border-white hover:bg-gray-200 hover:text-gray-700">SIGN IN</button>
 

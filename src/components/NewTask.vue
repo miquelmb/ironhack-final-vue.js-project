@@ -2,9 +2,10 @@
 
   <div class="max-w-7xl m-auto">
 
+    <!-- section title and cathy phrase -->
     <h2 class="font-dosis text-4xl font-medium m-auto my-9 text-center text-slate-700 w-4/5">Add a new task</h2>
     <p class="font-dosis text-2xl m-auto my-9 text-center text-slate-700 w-4/5">Get focused! You're at {{ month }} {{ dd }}, {{ yyyy }}!</p>
-    <!-- form -->
+    <!-- Form with inputs to create a new task -->
     <form class="w-2/3 text-center p-8 m-auto mb-10 flex flex-col rounded-md shadow-lg bg-zinc-100 bg-opacity-70 justify-center" @submit.prevent="addTask">
       <input class="font-dosis p-2 m-3 text-gray-500 focus:outline-slate-200 focus:outline-none" v-model="taskTitle" type="text" placeholder="Task Title" />
       <input class="font-dosis p-2 m-3 text-gray-500 focus:outline-slate-200 focus:outline-none" v-model="taskDescription" type="text" placeholder="Description" />
@@ -12,7 +13,8 @@
       duration-200 border-solid border-lg border-transparent hover:border-white hover:bg-gray-300 hover:text-gray-700" type="submit">Add Task</button>
     </form>
 
-    <div class="w-1/2 text-center p-4 m-auto mb-20 flex flex-col text-red-800 rounded-md shadow-lg bg-zinc-100 bg-opacity-70 justify-center" v-if="errorMsg">
+    <!-- displaying possible errors -->
+    <div v-if="errorMsg" class="w-1/2 text-center p-4 m-auto mb-20 flex flex-col text-red-800 rounded-md shadow-lg bg-zinc-100 bg-opacity-70 justify-center">
         <p>{{ errorMsg }}</p>
     </div>
 
@@ -22,47 +24,18 @@
 
 <script setup>
 import { ref} from "vue";
-import { useUserStore } from "../stores/user";
-import { useTaskStore } from "../stores/task";
-import { supabase } from "../supabase";
 
-// pruebas
-// const userID = useUserStore().user.email
-// get today's date
+// Get today's date
 let today = new Date();
-console.log(today)
 let dd = String(today.getDate()).padStart(2, '0');
-let mm = String(today.getMonth() + 1).padStart(2, '0');
+let mm = today.getMonth() + 1;
 let yyyy = today.getFullYear();
 
-let month = "";
-if (mm === "01") {
-  month = 'January'
-} else if (mm === "02") {
-  month = 'February'
-} else if (mm === "03") {
-  month = 'March'
-} else if (mm === "04") {
-  month = 'April'
-} else if (mm === "05") {
-  month = 'May'
-} else if (mm === "06") {
-  month = 'June'
-} else if (mm === "07") {
-  month = 'July'
-} else if (mm === "08") {
-  month = 'August'
-} else if (mm === "09") {
-  month = 'September'
-} else if (mm === "10") {
-  month = 'October'
-} else if (mm === "11") {
-  month = 'November'
-} else if (mm === "12") {
-  month = 'December'
-} else {
-  month = 'Wrong month!'
-};
+// Get the full name of the current month
+let months = {1:'January', 2:'February', 3:'March', 4:'April', 5:'May', 6:'June',
+7:'July', 8:'August', 9:'September', 10:'October', 11:'November', 12:'December'};
+
+let month = months[mm]
 
 // constant to save a variable that define the custom event that will be emitted to the homeView
 const emit = defineEmits(['addTask'])
@@ -77,7 +50,6 @@ const taskDescription = ref("");
 const errorMsg = ref(null);
 
 // arrow function to call the form holding the task title and task description that uses a conditional to first checks if the task title is empty, if true the error message is displayed through the errorMessage container and sets a timeOut method that hides the error after some time. Else, its emmits a custom event to the home view with the task title and task description; clears the task title and task description input fields.
-// ERROR HANDLING DEJA LOS "" un rato.. DEBERÍA SER ASYNC?
 const addTask = async () => {
   if (!taskTitle.value && !taskDescription.value) {
     errorMsg.value = "Please insert a title and a description";
@@ -96,6 +68,7 @@ const addTask = async () => {
       }, 4000);
   } else {
     emit("addTask", taskTitle.value, taskDescription.value);
+    // restart values to empty
     taskTitle.value = "";
     taskDescription.value = "";
   }
